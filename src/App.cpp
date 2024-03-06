@@ -360,6 +360,8 @@ void setAgentsFlow(Agent *agent, float desiredSpeed, float maxSpeed, float minSp
     agent->setDesiredSpeed(desiredSpeed);
     std::vector<float> color = getPedesColor(maxSpeed, minSpeed, agent->getDesiredSpeed(), classificationType);
     agent->setColor(color[0], color[1], color[2]);
+    agent->setAgeDistribution(inputData["ageDistribution"]["description"],inputData["ageDistribution"]["distribution"]["normal"]["description"],(int)inputData["ageDistribution"]["distribution"]["normal"]["numberOfValues"],
+                    (int)inputData["ageDistribution"]["distribution"]["normal"]["minValue"],(int)inputData["ageDistribution"]["distribution"]["normal"]["maxValue"],(int)inputData["numOfAgents"]["value"]);
     socialForce->addAgent(agent);
 }
 
