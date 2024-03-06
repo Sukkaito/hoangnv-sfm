@@ -619,8 +619,7 @@ void createAGVs()
                 agv->setAcceleration(inputData["acceleration"]["value"]);
                 agv->setThresholdDisToPedes((float)inputData["thresDistance"]["value"]);
                 agv->setRandomness((int)inputData["randomness"]["value"]);
-                agv->setAgeDistribution(inputData["ageDistribution"]["description"],inputData["ageDistribution"]["distribution"]["normal"]["description"],(int)inputData["ageDistribution"]["distribution"]["normal"]["numberOfValues"],
-                    (int)inputData["ageDistribution"]["distribution"]["normal"]["minValue"],(int)inputData["ageDistribution"]["distribution"]["normal"]["maxValue"],(int)inputData["numOfAgents"]["value"]);
+               
                 for (int i = 1; i < route.size(); i++)
                 {
                     agv->setPath(route[i].x, route[i].y, 1.0);

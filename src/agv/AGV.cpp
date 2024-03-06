@@ -78,14 +78,7 @@ void AGV::setRandomness(int randomness)
     this->randomness = randomness;
 }
 
-void AGV::setAgeDistribution(string description, string distribution_description, int numberOfValues, int minValue, int maxValue, int numOfAgents) {
-    this->ageDistribution.description = description;
-    this->ageDistribution.distribution.normalDistribution.description = distribution_description;
-    this->ageDistribution.distribution.normalDistribution.samples = numOfAgents;
-    this->ageDistribution.distribution.normalDistribution.numberOfValues = 100;
-    this->ageDistribution.distribution.normalDistribution.minValue = 5;
-    this->ageDistribution.distribution.normalDistribution.maxValue = 104;
-}
+
 
 
 Point3f AGV::getNearestPoint(Point3f positionAgent)

@@ -21,19 +21,7 @@ private:
     int totalStopTime;
     int collisionStartTime;
     int randomness;
-    // std::unordered_map<std::string, std::unordered_map<std::string, int>> ageDistribution;
-    struct nodes {
-    string description;
-    struct distribution {
-        struct normal {
-            string description;
-            int samples;
-            int numberOfValues;
-            int minValue;
-            int maxValue;
-        } normalDistribution;
-    } distribution;
-} ageDistribution;
+    
     
     
 
@@ -78,11 +66,10 @@ public:
 
     void setRandomness(int randomness);
 
-    void setAgeDistribution(string description,string distribution_description, int numberOfValues, int minValue, int maxValue, int numOfAgents);
+    
 
     int getRandomness() const{ return randomness;}
 
-    nodes getAgeDistribution() const{return ageDistribution;}
 
     Vector3f getDirection() const { return direction; }
 
