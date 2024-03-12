@@ -20,7 +20,6 @@ private:
     bool isCollision;
     int totalStopTime;
     int collisionStartTime;
-    int randomness;
     
     
     
@@ -63,13 +62,6 @@ public:
     void setPoints(Point3f pointA, Point3f pointB, Point3f pointC, Point3f pointD);
 
     void setDirection(float x, float y);
-
-    void setRandomness(int randomness);
-
-    
-
-    int getRandomness() const{ return randomness;}
-
 
     Vector3f getDirection() const { return direction; }
 

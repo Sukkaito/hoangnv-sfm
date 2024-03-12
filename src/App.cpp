@@ -620,7 +620,6 @@ void createAGVs()
                 agv->setDesiredSpeed((float)inputData["agvDesiredSpeed"]["value"]);
                 agv->setAcceleration(inputData["acceleration"]["value"]);
                 agv->setThresholdDisToPedes((float)inputData["thresDistance"]["value"]);
-                agv->setRandomness((int)inputData["randomness"]["value"]);
                
                 for (int i = 1; i < route.size(); i++)
                 {
