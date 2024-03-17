@@ -325,3 +325,12 @@ Vector3f Agent::getAgvInteractForce(vector<AGV *> agvs)
 
     return f_ij;
 }
+
+void Agent::setAgeDistribution(string description, string distribution_description, int numberOfValues, int minValue, int maxValue, int numOfAgents) {
+    this->ageDistribution.description = description;
+    this->ageDistribution.distribution.normalDistribution.description = distribution_description;
+    this->ageDistribution.distribution.normalDistribution.samples = numOfAgents;
+    this->ageDistribution.distribution.normalDistribution.numberOfValues = numberOfValues;
+    this->ageDistribution.distribution.normalDistribution.minValue = minValue;
+    this->ageDistribution.distribution.normalDistribution.maxValue = maxValue;
+}

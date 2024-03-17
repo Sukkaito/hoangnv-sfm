@@ -15,6 +15,18 @@ private:
     float radius;
     float impatient;
     bool stopAtCorridor;
+    struct nodes {
+    string description;
+    struct distribution {
+        struct normal {
+            string description;
+            int samples;
+            int numberOfValues;
+            int minValue;
+            int maxValue;
+        } normalDistribution;
+    } distribution;
+} ageDistribution;
 
 public:
     Agent();
@@ -41,7 +53,8 @@ public:
     Vector3f getAgentInteractForce(std::vector<Agent *> agents);
     Vector3f getWallInteractForce(std::vector<Wall *> walls);
     Vector3f getAgvInteractForce(std::vector<AGV *> agvs);
-
+    void setAgeDistribution(string description,string normal_description, int numberOfValues, int minValue, int maxValue, int numOfAgents);
+    nodes getAgeDistribution() const{return ageDistribution;}
     using MovingObject::move;
     void move(std::vector<Agent *> agents, std::vector<Wall *> walls, std::vector<AGV *> agvs, float stepTime);
 };

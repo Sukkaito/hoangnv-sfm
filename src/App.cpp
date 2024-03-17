@@ -360,6 +360,8 @@ void setAgentsFlow(Agent *agent, float desiredSpeed, float maxSpeed, float minSp
     agent->setDesiredSpeed(desiredSpeed);
     std::vector<float> color = getPedesColor(maxSpeed, minSpeed, agent->getDesiredSpeed(), classificationType);
     agent->setColor(color[0], color[1], color[2]);
+    agent->setAgeDistribution(inputData["ageDistribution"]["description"],inputData["ageDistribution"]["distribution"]["normal"]["description"],(int)inputData["ageDistribution"]["distribution"]["normal"]["numberOfValues"],
+                    (int)inputData["ageDistribution"]["distribution"]["normal"]["minValue"],(int)inputData["ageDistribution"]["distribution"]["normal"]["maxValue"],(int)inputData["numOfAgents"]["value"]);
     socialForce->addAgent(agent);
 }
 
@@ -540,7 +542,7 @@ void createAGVs()
             }
         }
     }
-    else
+    else if ((int)inputData["runMode"]["value"]==1)
     {
         int numOfHallway = juncDataList.size();
         int numRunPerHallway = (int)inputData["noRunPerHallway"]["value"];
@@ -567,6 +569,58 @@ void createAGVs()
                 agv->setDesiredSpeed((float)inputData["agvDesiredSpeed"]["value"]);
                 agv->setAcceleration(inputData["acceleration"]["value"]);
                 agv->setThresholdDisToPedes((float)inputData["thresDistance"]["value"]);
+                for (int i = 1; i < route.size(); i++)
+                {
+                    agv->setPath(route[i].x, route[i].y, 1.0);
+                }
+                socialForce->addAGV(agv);
+
+                int marker = numRunPerHallway * (juncIndexTemp + 1) - 1;
+                if ((int)inputData["runConcurrently"]["value"] == 1)
+                {
+                    marker = numRunPerHallway * 2 * (juncIndexTemp + 1) - 1;
+                }
+                if (agv->getId() == marker)
+                {
+                    juncIndexTemp = juncIndexTemp + 1;
+                    if (juncIndexTemp == juncDataList.size())
+                    {
+                        juncIndexTemp = 0;
+                    }
+                    hallwayLength = juncDataList[juncIndexTemp].items().begin().value();
+                    length1Side = (hallwayLength) / 2;
+                    juncDataTemp = {length1Side, length1Side};
+                }
+            }
+        }
+    }
+    else {
+        int numOfHallway = juncDataList.size();
+        int numRunPerHallway = (int)inputData["noRunPerHallway"]["value"];
+        int juncIndexTemp = 0;
+        float hallwayLength = juncDataList[juncIndexTemp].items().begin().value();
+        cout << "*****=> " << juncDataList[juncIndex].items().begin().key() << ": " << hallwayLength << endl;
+        float length1Side = (hallwayLength) / 2;
+        vector<float> juncDataTemp = {length1Side, length1Side};
+        int numAGVPerRun = 1;
+        if ((int)inputData["runConcurrently"]["value"] == 1)
+        {
+            numAGVPerRun = 2;
+        }
+        for (int i = 0; i < numOfHallway * numRunPerHallway; i++)
+        {
+            for (int j = 0; j < numAGVPerRun; j++)
+            {
+                agv = new AGV();
+                vector<Point3f> route = Utility::getRouteAGV(j, 1, walkwayWidth, juncDataTemp); // Just need the source
+                agv->setDirection(j, 1);
+                agv->setPosition(route[0].x, route[0].y);
+
+                agv->setDestination(route[route.size() - 1].x, route[route.size() - 1].y);
+                agv->setDesiredSpeed((float)inputData["agvDesiredSpeed"]["value"]);
+                agv->setAcceleration(inputData["acceleration"]["value"]);
+                agv->setThresholdDisToPedes((float)inputData["thresDistance"]["value"]);
+               
                 for (int i = 1; i < route.size(); i++)
                 {
                     agv->setPath(route[i].x, route[i].y, 1.0);

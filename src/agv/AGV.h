@@ -20,6 +20,9 @@ private:
     bool isCollision;
     int totalStopTime;
     int collisionStartTime;
+    
+    
+    
 
 public:
     AGV();

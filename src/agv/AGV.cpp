@@ -73,6 +73,8 @@ void AGV::setDirection(float x, float y)
     this->direction.set(x, y, 0.0F);
 }
 
+
+
 Point3f AGV::getNearestPoint(Point3f positionAgent)
 {
     vector<Point3f> points;
