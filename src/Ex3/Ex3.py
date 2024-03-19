@@ -39,7 +39,7 @@ def write_json_file(filename, data):
 
 def main():
     # Load data from file
-    with open("C:\\Users\\admin88\\Desktop\\VSCode\\hoangnv-sfm-main\\hoangnv-sfm-main\\src\\Ex3\\dataEx3.json", "r") as file:
+    with open("dataEx3.json", "r") as file:
         data = json.load(file)
 
     # Generate pedestrians
