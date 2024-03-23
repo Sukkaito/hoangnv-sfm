@@ -1,11 +1,15 @@
 import json
 import random
+
 def generate_pedestrians(data):
     pedestrians = []
 
     num_agents = data["numOfAgents"]["value"]
-    no_disability_percentage = data["p1"]["value"] + data["p2"]["value"]
+    no_disability_percentage = data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"] + data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]
     num_personnel = int(num_agents * (no_disability_percentage / 100))
+
+    # Convert department keys to a list for random selection
+    department_keys = list(data["wardDistribution"]["distribution"].keys())
 
     # Generate pedestrians
     for _ in range(num_agents):
@@ -25,7 +29,7 @@ def generate_pedestrians(data):
 
         if len(pedestrians) < num_personnel:
             pedestrian["type"] = "Personnel"
-            pedestrian["department"] = random.choice(data["journeyDistribution"]["value"][1:-1])  # Exclude start and end departments
+            pedestrian["department"] = random.choice(department_keys)  # Select a department randomly
         else:
             pedestrian["type"] = random.choice(["Patient", "Visitor"])
 
@@ -39,14 +43,14 @@ def write_json_file(filename, data):
 
 def main():
     # Load data from file
-    with open("dataEx3.json", "r") as file:
+    with open("../../data/input.json", "r") as file:
         data = json.load(file)
 
     # Generate pedestrians
     pedestrians = generate_pedestrians(data)
 
     # Write output to JSON file
-    write_json_file("output.json", pedestrians)
+    write_json_file("outputEx3.json", pedestrians)
 
 if __name__ == "__main__":
     main()

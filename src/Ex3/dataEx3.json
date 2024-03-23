@@ -88,7 +88,7 @@
     "value": 10
   },
   "journeyDistribution": {
-    "description": "Distribution of departments for personnel",
+    "description": "Distribtion of departments for personnel",
     "value": ["Department A", "Department B", "Department C", "Department D"]
   }
 }
