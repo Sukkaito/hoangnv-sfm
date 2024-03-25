@@ -1,73 +1,77 @@
 import json
 import random
 
-class Pedestrian:
-    def __init__(self, age, department, personality):
-        self.age = age
-        self.department = department
-        self.personality = personality
 
-    def toJSON(self):
-        return {
-            "age": self.age,
-            "department": self.department,
-            "personality": self.personality
+class Pedestrian:
+    def __init__(self, age, personality):
+        self.age = age
+        self.personality = personality
+        self.emotions = {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
         }
 
 
 class Patient(Pedestrian):
-    def __init__(self, age, department, personality, status):
-        super().__init__(age, department, personality)
+    def __init__(self, age, personality, status, department):
+        super().__init__(age, personality)
         self.type = "Patient"
         self.status = status
+        self.department = department
 
     def toJSON(self):
-        json_data = super().toJSON()
-        json_data.update({
+        return {
             "type": self.type,
-            "status": self.status
-        })
-        return json_data
+            "age": self.age,
+            "personality": self.personality,
+            "emotions": self.emotions,
+            "status": self.status,
+            "department": self.department
+        }
 
 
 class Visitor(Pedestrian):
-    def __init__(self, age, department, personality):
-        super().__init__(age, department, personality)
+    def __init__(self, age, personality, status, department):
+        super().__init__(age, personality)
         self.type = "Visitor"
-        self.status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
-                                     weights=[60, 10])[0]
+        self.status = status
+        self.department = department
 
     def toJSON(self):
-        json_data = super().toJSON()
-        json_data.update({
+        return {
             "type": self.type,
-            "status": self.status
-        })
-        return json_data
+            "age": self.age,
+            "personality": self.personality,
+            "emotions": self.emotions,
+            "status": self.status,
+            "department": self.department
+        }
 
 
 class Personnel(Pedestrian):
-    def __init__(self, age, departments, personality):
-        super().__init__(age, departments, personality)
+    def __init__(self, age, personality, status, departments):
+        super().__init__(age, personality)
         self.type = "Personnel"
+        self.status = status
         self.departments = departments
-        self.status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
-                                     weights=[60, 10])[0]
 
     def toJSON(self):
-        json_data = super().toJSON()
-        json_data.update({
+        return {
             "type": self.type,
+            "age": self.age,
+            "personality": self.personality,
+            "emotions": self.emotions,
             "status": self.status,
-            "department": self.departments
-        })
-        return json_data
+            "departments": self.departments
+        }
 
 
 def generate_pedestrians(data):
     pedestrians = []
-    num_openness = 0
-    num_neuroticism = 0
 
     num_agents = data["numOfAgents"]["value"]
     num_personnel = int(num_agents * random.uniform(0.8, 0.9) * (
@@ -86,6 +90,8 @@ def generate_pedestrians(data):
     num_sticks = 0
     num_wheelchairs = 0
     num_blind = 0
+    num_openness = 0
+    num_neuroticism = 0
 
     while len(pedestrians) < num_agents:
         age = random.randint(11, 90)
@@ -99,40 +105,41 @@ def generate_pedestrians(data):
 
         if len(pedestrians) < num_personnel:
             # Personnel
+            status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
+                                         weights=[60, 10])[0]
             departments_for_personnel = random.sample(departments, 3)  # Chọn ngẫu nhiên 3 khoa viện
-            pedestrian = Personnel(age, departments_for_personnel, personality)
+            pedestrian = Personnel(age, personality, status, departments_for_personnel)
         else:
-            pedestrian_type = random.choices([Patient, Visitor], weights=[70, 30])[0]
+            pedestrian_type = random.choice([Patient, Visitor])
             department = random.choice(departments)
             if pedestrian_type == Patient:
                 # Lấy danh sách các loại bệnh và trọng số tương ứng
-                illnesses = ["crutches", "sticks", "wheelchairs", "blind"]
-                weights = [data["walkability"]["distribution"][illness]["value"] for illness in illnesses]
+                statuses = ["crutches", "sticks", "wheelchairs", "blind"]
+                weights = [data["walkability"]["distribution"][status]["value"] for status in statuses]
                 # Chuẩn hóa trọng số để tổng bằng 1
                 total_weight = sum(weights)
                 weights = [weight / total_weight for weight in weights]
-                illness_type = random.choices(illnesses, weights=weights)[0]
-                pedestrian = pedestrian_type(age, department, personality, illness_type)
+                status = random.choices(statuses, weights=weights)[0]
+                pedestrian = pedestrian_type(age, personality, status, department)
                 num_patients += 1
-                if illness_type == "crutches":
+                if status == "crutches":
                     num_crutches += 1
-                elif illness_type == "sticks":
+                elif status == "sticks":
                     num_sticks += 1
-                elif illness_type == "wheelchairs":
+                elif status == "wheelchairs":
                     num_wheelchairs += 1
-                elif illness_type == "blind":
+                elif status == "blind":
                     num_blind += 1
             else:
-                pedestrian = pedestrian_type(age, department, personality)
+                pedestrian = pedestrian_type(age, personality, status, department)
                 num_visitors += 1
 
-        if pedestrian.age < 11 and pedestrian.personality == "neurotic":
+        if pedestrian.age < 11 and pedestrian.neuroticism > 0:
             continue
 
         if isinstance(pedestrian, Personnel):
             if pedestrian.age < 23 or pedestrian.age > 61:
                 continue
-
         if personality == "open":
             num_openness += 1
         elif personality == "neurotic":
@@ -155,7 +162,9 @@ def generate_pedestrians(data):
 
 def write_json_file(filename, data):
     with open(filename, "w") as json_file:
-        json.dump([pedestrian.toJSON() for pedestrian in data], json_file, indent=4)
+        json.dump(
+            [pedestrian.toJSON() if hasattr(pedestrian, 'toJSON') else pedestrian.__dict__ for pedestrian in data],
+            json_file, indent=4)
 
 
 def main():
