@@ -131,6 +131,8 @@ def generate_pedestrians(data):
                 elif status == "blind":
                     num_blind += 1
             else:
+                status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
+                                        weights=[60, 10])[0]
                 pedestrian = pedestrian_type(age, personality, status, department)
                 num_visitors += 1
 
