@@ -94,7 +94,7 @@ def generate_pedestrians(data):
     num_neuroticism = 0
 
     while len(pedestrians) < num_agents:
-        age = random.randint(11, 90)
+        age = random.randint(data["ageDistribution"]["distribution"]["normal"]["minValue"], data["ageDistribution"]["distribution"]["normal"]["maxValue"])
         personality = random.choice(["open", "neurotic"])
 
         if num_neuroticism >= 0.53 * num_agents:
@@ -106,7 +106,7 @@ def generate_pedestrians(data):
         if len(pedestrians) < num_personnel:
             # Personnel
             status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
-                                    weights=[60, 10])[0]
+                                    weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"], data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
             departments_for_personnel = random.sample(departments, 3)  # Chọn ngẫu nhiên 3 khoa viện
             pedestrian = Personnel(age, personality, status, departments_for_personnel)
         else:
@@ -132,11 +132,11 @@ def generate_pedestrians(data):
                     num_blind += 1
             else:
                 status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
-                                        weights=[60, 10])[0]
+                                        weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"], data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
                 pedestrian = pedestrian_type(age, personality, status, department)
                 num_visitors += 1
 
-        if pedestrian.age < 11 and pedestrian.neuroticism > 0:
+        if pedestrian.age < 11 and pedestrian.status == "neurotic":
             continue
 
         if isinstance(pedestrian, Personnel):
