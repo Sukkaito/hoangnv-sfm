@@ -85,32 +85,32 @@
       "noDisabilityNoOvertaking": {
         "description": "Percentage of agents (No disability, without overtaking behavior)",
         "velocity": 1.24,
-        "value": 60
+        "value": 22
       },
       "noDisabilityOvertaking": {
         "description": "Percentage of agents (No disability, with overtaking behavior)",
         "velocity": 2.48,
-        "value": 10
+        "value": 5
       },
       "crutches": {
         "description": "Percentage of agents (Walking with crutches)",
         "velocity": 0.94,
-        "value": 10
+        "value": 17
       },
       "sticks": {
         "description": "Percentage of agents (Walking with sticks)",
         "velocity": 0.81,
-        "value": 10
+        "value": 22
       },
       "wheelchairs": {
         "description": "Percentage of agents (Wheelchairs)",
         "velocity": 0.69,
-        "value": 5
+        "value": 17
       },
       "blind": {
         "description": "Percentage of agents (The blind)",
         "velocity": 0.52,
-        "value": 5
+        "value": 17
       },
       "normal": {
         "description": "normal distribution",
@@ -181,7 +181,7 @@
       "normal": {
         "description": "normal distribution",
         "samples": 13,
-        "sumOfValues": "forPersonel",
+        "sumOfValues": "forPersonnel",
         "lowerBound": 0,
         "upperBound": 10000
       }

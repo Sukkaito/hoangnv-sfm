@@ -1,5 +1,6 @@
 import json
 import random
+import numpy as np
 
 
 class Pedestrian:
@@ -17,11 +18,11 @@ class Pedestrian:
 
 
 class Patient(Pedestrian):
-    def __init__(self, age, personality, status, department):
+    def __init__(self, age, personality, status, journey):
         super().__init__(age, personality)
         self.type = "Patient"
         self.status = status
-        self.department = department
+        self.journey = journey
 
     def toJSON(self):
         return {
@@ -30,16 +31,16 @@ class Patient(Pedestrian):
             "personality": self.personality,
             "emotions": self.emotions,
             "status": self.status,
-            "department": self.department
+            "journey": self.journey
         }
 
 
 class Visitor(Pedestrian):
-    def __init__(self, age, personality, status, department):
+    def __init__(self, age, personality, status, journey):
         super().__init__(age, personality)
         self.type = "Visitor"
         self.status = status
-        self.department = department
+        self.journey = journey
 
     def toJSON(self):
         return {
@@ -48,16 +49,16 @@ class Visitor(Pedestrian):
             "personality": self.personality,
             "emotions": self.emotions,
             "status": self.status,
-            "department": self.department
+            "journey": self.journey
         }
 
 
 class Personnel(Pedestrian):
-    def __init__(self, age, personality, status, departments):
+    def __init__(self, age, personality, status, journey):
         super().__init__(age, personality)
         self.type = "Personnel"
         self.status = status
-        self.departments = departments
+        self.journey = journey
 
     def toJSON(self):
         return {
@@ -66,23 +67,31 @@ class Personnel(Pedestrian):
             "personality": self.personality,
             "emotions": self.emotions,
             "status": self.status,
-            "departments": self.departments
+            "journey": self.journey
         }
+
+
+class Event:
+    allEvent = np.empty(20)
+    allTimeDistances = np.array(20)
 
 
 def generate_pedestrians(data):
     pedestrians = []
 
     num_agents = data["numOfAgents"]["value"]
+    num_noDisability = int(num_agents * (
+            data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"] +
+            data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]) / 100)
     num_personnel = int(num_agents * random.uniform(0.8, 0.9) * (
             data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"] +
             data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]) / 100)
 
-    departments = list(data["wardDistribution"]["distribution"].keys())[:-1]  # Exclude 'normal'
+    journeys = list(data["wardDistribution"]["distribution"].keys())[:-1]  # Exclude 'normal'
     journey_distribution = data["walkability"]["distribution"]["journeyDistribution"]["distribution"]
     for key in journey_distribution:
-        if key != "forPersonel" and journey_distribution[key]["start"] in departments:
-            departments.remove(journey_distribution[key]["start"])
+        if key != "forPersonnel" and journey_distribution[key]["start"] in journeys:
+            journeys.remove(journey_distribution[key]["start"])
 
     num_patients = 0
     num_visitors = 0
@@ -94,7 +103,8 @@ def generate_pedestrians(data):
     num_neuroticism = 0
 
     while len(pedestrians) < num_agents:
-        age = random.randint(data["ageDistribution"]["distribution"]["normal"]["minValue"], data["ageDistribution"]["distribution"]["normal"]["maxValue"])
+        age = random.randint(data["ageDistribution"]["distribution"]["normal"]["minValue"],
+                             data["ageDistribution"]["distribution"]["normal"]["maxValue"])
         personality = random.choice(["open", "neurotic"])
 
         if num_neuroticism >= 0.53 * num_agents:
@@ -106,35 +116,38 @@ def generate_pedestrians(data):
         if len(pedestrians) < num_personnel:
             # Personnel
             status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
-                                    weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"], data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
-            departments_for_personnel = random.sample(departments, 3)  # Chọn ngẫu nhiên 3 khoa viện
-            pedestrian = Personnel(age, personality, status, departments_for_personnel)
+                                    weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"],
+                                             data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
+            journeyss = random.sample(journeys, 3)  # Chọn ngẫu nhiên 3 khoa viện
+            pedestrian = Personnel(age, personality, status, journeyss)
+        elif len(pedestrians) < num_noDisability:
+            # Visitor
+            status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
+                                    weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"],
+                                             data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
+            journey = random.choice(journeys)
+            pedestrian = Visitor(age, personality, status, journey)
+            num_visitors += 1
         else:
-            pedestrian_type = random.choice([Patient, Visitor])
-            department = random.choice(departments)
-            if pedestrian_type == Patient:
-                # Lấy danh sách các loại bệnh và trọng số tương ứng
-                statuses = ["crutches", "sticks", "wheelchairs", "blind"]
-                weights = [data["walkability"]["distribution"][status]["value"] for status in statuses]
-                # Chuẩn hóa trọng số để tổng bằng 1
-                total_weight = sum(weights)
-                weights = [weight / total_weight for weight in weights]
-                status = random.choices(statuses, weights=weights)[0]
-                pedestrian = pedestrian_type(age, personality, status, department)
-                num_patients += 1
-                if status == "crutches":
-                    num_crutches += 1
-                elif status == "sticks":
-                    num_sticks += 1
-                elif status == "wheelchairs":
-                    num_wheelchairs += 1
-                elif status == "blind":
-                    num_blind += 1
-            else:
-                status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
-                                        weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"], data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
-                pedestrian = pedestrian_type(age, personality, status, department)
-                num_visitors += 1
+            # Patient
+            journey = random.choice(journeys)
+            # Lấy danh sách các loại bệnh và trọng số tương ứng
+            statuses = ["crutches", "sticks", "wheelchairs", "blind"]
+            weights = [data["walkability"]["distribution"][status]["value"] for status in statuses]
+            # Chuẩn hóa trọng số để tổng bằng 1
+            total_weight = sum(weights)
+            weights = [weight / total_weight for weight in weights]
+            status = random.choices(statuses, weights=weights)[0]
+            pedestrian = Patient(age, personality, status, journey)
+            num_patients += 1
+            if status == "crutches":
+                num_crutches += 1
+            elif status == "sticks":
+                num_sticks += 1
+            elif status == "wheelchairs":
+                num_wheelchairs += 1
+            elif status == "blind":
+                num_blind += 1
 
         if pedestrian.age < 11 and pedestrian.status == "neurotic":
             continue
