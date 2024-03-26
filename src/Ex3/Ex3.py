@@ -75,8 +75,8 @@ def generate_pedestrians(data):
 
     num_agents = data["numOfAgents"]["value"]
     num_personnel = int(num_agents * random.uniform(0.8, 0.9) * (
-                data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"] +
-                data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]) / 100)
+            data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"] +
+            data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]) / 100)
 
     departments = list(data["wardDistribution"]["distribution"].keys())[:-1]  # Exclude 'normal'
     journey_distribution = data["walkability"]["distribution"]["journeyDistribution"]["distribution"]
@@ -97,16 +97,16 @@ def generate_pedestrians(data):
         age = random.randint(11, 90)
         personality = random.choice(["open", "neurotic"])
 
-        if (num_neuroticism >= 0.53 * num_agents):
+        if num_neuroticism >= 0.53 * num_agents:
             personality = "open"
 
-        if (num_openness >= 0.53 * num_agents):
+        if num_openness >= 0.53 * num_agents:
             personality = "neurotic"
 
         if len(pedestrians) < num_personnel:
             # Personnel
             status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
-                                         weights=[60, 10])[0]
+                                    weights=[60, 10])[0]
             departments_for_personnel = random.sample(departments, 3)  # Chọn ngẫu nhiên 3 khoa viện
             pedestrian = Personnel(age, personality, status, departments_for_personnel)
         else:
