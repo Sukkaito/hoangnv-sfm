@@ -181,7 +181,7 @@
       "normal": {
         "description": "normal distribution",
         "samples": 13,
-        "sumOfValues": "forPersonnel",
+        "sumOfValues": "forPersonel",
         "lowerBound": 0,
         "upperBound": 10000
       }

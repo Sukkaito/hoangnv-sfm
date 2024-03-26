@@ -53,10 +53,10 @@ class Visitor(Pedestrian):
         }
 
 
-class Personnel(Pedestrian):
+class Personel(Pedestrian):
     def __init__(self, age, personality, status, journey):
         super().__init__(age, personality)
-        self.type = "Personnel"
+        self.type = "Personel"
         self.status = status
         self.journey = journey
 
@@ -83,14 +83,14 @@ def generate_pedestrians(data):
     num_noDisability = int(num_agents * (
             data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"] +
             data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]) / 100)
-    num_personnel = int(num_agents * random.uniform(0.8, 0.9) * (
+    num_personel = int(num_agents * random.uniform(0.8, 0.9) * (
             data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"] +
             data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]) / 100)
 
     journeys = list(data["wardDistribution"]["distribution"].keys())[:-1]  # Exclude 'normal'
     journey_distribution = data["walkability"]["distribution"]["journeyDistribution"]["distribution"]
     for key in journey_distribution:
-        if key != "forPersonnel" and journey_distribution[key]["start"] in journeys:
+        if key != "forPersonel" and journey_distribution[key]["start"] in journeys:
             journeys.remove(journey_distribution[key]["start"])
 
     num_patients = 0
@@ -113,13 +113,13 @@ def generate_pedestrians(data):
         if num_openness >= 0.53 * num_agents:
             personality = "neurotic"
 
-        if len(pedestrians) < num_personnel:
-            # Personnel
+        if len(pedestrians) < num_personel:
+            # Personel
             status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
                                     weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"],
                                              data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
             journeyss = random.sample(journeys, 3)  # Chọn ngẫu nhiên 3 khoa viện
-            pedestrian = Personnel(age, personality, status, journeyss)
+            pedestrian = Personel(age, personality, status, journeyss)
         elif len(pedestrians) < num_noDisability:
             # Visitor
             status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
@@ -152,7 +152,7 @@ def generate_pedestrians(data):
         if pedestrian.age < 11 and pedestrian.status == "neurotic":
             continue
 
-        if isinstance(pedestrian, Personnel):
+        if isinstance(pedestrian, Personel):
             if pedestrian.age < 23 or pedestrian.age > 61:
                 continue
         if personality == "open":
@@ -162,7 +162,7 @@ def generate_pedestrians(data):
 
         pedestrians.append(pedestrian)
 
-    print("Number of personnel:", num_personnel)
+    print("Number of personel:", num_personel)
     print("Number of visitors:", num_visitors)
     print("Number of patients:", num_patients)
     print("Number of patients with crutches:", num_crutches)
