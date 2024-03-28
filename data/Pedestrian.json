@@ -1,7 +1,6 @@
 [
     {
-        "type": "Personel",
-        "age": 60,
+        "age": 58,
         "personality": "neurotic",
         "emotions": {
             "pleasure": 0.75,
@@ -11,325 +10,15 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "noDisabilityNoOvertaking",
-        "journey": [
-            "B",
-            "E",
-            "G"
-        ]
-    },
-    {
         "type": "Personel",
-        "age": 33,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityNoOvertaking",
-        "journey": [
-            "G",
-            "M",
-            "N"
-        ]
-    },
-    {
-        "type": "Personel",
-        "age": 45,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityOvertaking",
-        "journey": [
-            "G",
-            "K",
-            "B"
-        ]
-    },
-    {
-        "type": "Personel",
-        "age": 27,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityNoOvertaking",
-        "journey": [
-            "N",
-            "W",
-            "F"
-        ]
-    },
-    {
-        "type": "Personel",
-        "age": 31,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
         "status": "noDisabilityNoOvertaking",
         "journey": [
             "N",
             "L",
-            "B"
+            "W"
         ]
     },
     {
-        "type": "Personel",
-        "age": 37,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityNoOvertaking",
-        "journey": [
-            "N",
-            "L",
-            "M"
-        ]
-    },
-    {
-        "type": "Personel",
-        "age": 55,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityNoOvertaking",
-        "journey": [
-            "M",
-            "G",
-            "N"
-        ]
-    },
-    {
-        "type": "Personel",
-        "age": 54,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityNoOvertaking",
-        "journey": [
-            "N",
-            "E",
-            "G"
-        ]
-    },
-    {
-        "type": "Personel",
-        "age": 33,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityNoOvertaking",
-        "journey": [
-            "E",
-            "M",
-            "L"
-        ]
-    },
-    {
-        "type": "Personel",
-        "age": 34,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityNoOvertaking",
-        "journey": [
-            "G",
-            "N",
-            "F"
-        ]
-    },
-    {
-        "type": "Personel",
-        "age": 32,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityOvertaking",
-        "journey": [
-            "F",
-            "B",
-            "M"
-        ]
-    },
-    {
-        "type": "Visitor",
-        "age": 23,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityNoOvertaking",
-        "journey": "F"
-    },
-    {
-        "type": "Visitor",
-        "age": 92,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "noDisabilityOvertaking",
-        "journey": "E"
-    },
-    {
-        "type": "Patient",
-        "age": 56,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "blind",
-        "journey": "M"
-    },
-    {
-        "type": "Patient",
-        "age": 79,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "blind",
-        "journey": "K"
-    },
-    {
-        "type": "Patient",
-        "age": 74,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "sticks",
-        "journey": "W"
-    },
-    {
-        "type": "Patient",
-        "age": 16,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "wheelchairs",
-        "journey": "N"
-    },
-    {
-        "type": "Patient",
-        "age": 19,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "wheelchairs",
-        "journey": "W"
-    },
-    {
-        "type": "Patient",
-        "age": 70,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "crutches",
-        "journey": "L"
-    },
-    {
-        "type": "Patient",
         "age": 43,
         "personality": "neurotic",
         "emotions": {
@@ -340,12 +29,35 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "crutches",
-        "journey": "G"
+        "type": "Personel",
+        "status": "noDisabilityNoOvertaking",
+        "journey": [
+            "F",
+            "E",
+            "M"
+        ]
     },
     {
-        "type": "Patient",
-        "age": 84,
+        "age": 41,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Personel",
+        "status": "noDisabilityOvertaking",
+        "journey": [
+            "B",
+            "K",
+            "L"
+        ]
+    },
+    {
+        "age": 61,
         "personality": "open",
         "emotions": {
             "pleasure": 0.75,
@@ -355,11 +67,234 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "wheelchairs",
+        "type": "Personel",
+        "status": "noDisabilityOvertaking",
+        "journey": [
+            "G",
+            "B",
+            "E"
+        ]
+    },
+    {
+        "age": 34,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Personel",
+        "status": "noDisabilityNoOvertaking",
+        "journey": [
+            "B",
+            "F",
+            "N"
+        ]
+    },
+    {
+        "age": 51,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Personel",
+        "status": "noDisabilityNoOvertaking",
+        "journey": [
+            "M",
+            "K",
+            "W"
+        ]
+    },
+    {
+        "age": 54,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Personel",
+        "status": "noDisabilityOvertaking",
+        "journey": [
+            "L",
+            "M",
+            "N"
+        ]
+    },
+    {
+        "age": 44,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Personel",
+        "status": "noDisabilityNoOvertaking",
+        "journey": [
+            "W",
+            "N",
+            "L"
+        ]
+    },
+    {
+        "age": 27,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Personel",
+        "status": "noDisabilityNoOvertaking",
+        "journey": [
+            "W",
+            "N",
+            "M"
+        ]
+    },
+    {
+        "age": 28,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Personel",
+        "status": "noDisabilityNoOvertaking",
+        "journey": [
+            "N",
+            "E",
+            "G"
+        ]
+    },
+    {
+        "age": 74,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Visitor",
+        "status": "noDisabilityOvertaking",
+        "journey": "M"
+    },
+    {
+        "age": 49,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Visitor",
+        "status": "noDisabilityOvertaking",
         "journey": "E"
     },
     {
+        "age": 57,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Visitor",
+        "status": "noDisabilityNoOvertaking",
+        "journey": "L"
+    },
+    {
+        "age": 82,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
         "type": "Patient",
+        "status": "crutches",
+        "journey": "W"
+    },
+    {
+        "age": 12,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "sticks",
+        "journey": "L"
+    },
+    {
+        "age": 101,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "blind",
+        "journey": "M"
+    },
+    {
+        "age": 5,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "blind",
+        "journey": "L"
+    },
+    {
         "age": 16,
         "personality": "neurotic",
         "emotions": {
@@ -370,27 +305,12 @@
             "hate": -0.4,
             "sad": -0.4
         },
+        "type": "Patient",
         "status": "wheelchairs",
         "journey": "K"
     },
     {
-        "type": "Patient",
-        "age": 100,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "blind",
-        "journey": "G"
-    },
-    {
-        "type": "Patient",
-        "age": 86,
+        "age": 49,
         "personality": "neurotic",
         "emotions": {
             "pleasure": 0.75,
@@ -400,12 +320,72 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "blind",
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "K"
+    },
+    {
+        "age": 30,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "K"
+    },
+    {
+        "age": 76,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "sticks",
+        "journey": "K"
+    },
+    {
+        "age": 43,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "wheelchairs",
         "journey": "E"
     },
     {
+        "age": 16,
+        "personality": "neurotic",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
         "type": "Patient",
-        "age": 67,
+        "status": "wheelchairs",
+        "journey": "F"
+    },
+    {
+        "age": 20,
         "personality": "open",
         "emotions": {
             "pleasure": 0.75,
@@ -415,12 +395,12 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "blind",
-        "journey": "G"
+        "type": "Patient",
+        "status": "crutches",
+        "journey": "E"
     },
     {
-        "type": "Patient",
-        "age": 95,
+        "age": 96,
         "personality": "neurotic",
         "emotions": {
             "pleasure": 0.75,
@@ -430,13 +410,13 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "crutches",
-        "journey": "B"
+        "type": "Patient",
+        "status": "sticks",
+        "journey": "K"
     },
     {
-        "type": "Patient",
-        "age": 61,
-        "personality": "neurotic",
+        "age": 38,
+        "personality": "open",
         "emotions": {
             "pleasure": 0.75,
             "surprise": 0.5,
@@ -445,12 +425,12 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "crutches",
+        "type": "Patient",
+        "status": "wheelchairs",
         "journey": "W"
     },
     {
-        "type": "Patient",
-        "age": 29,
+        "age": 66,
         "personality": "neurotic",
         "emotions": {
             "pleasure": 0.75,
@@ -460,13 +440,13 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "blind",
-        "journey": "G"
+        "type": "Patient",
+        "status": "sticks",
+        "journey": "B"
     },
     {
-        "type": "Patient",
-        "age": 46,
-        "personality": "neurotic",
+        "age": 56,
+        "personality": "open",
         "emotions": {
             "pleasure": 0.75,
             "surprise": 0.5,
@@ -475,57 +455,12 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "blind",
-        "journey": "F"
-    },
-    {
         "type": "Patient",
-        "age": 23,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
         "status": "crutches",
         "journey": "K"
     },
     {
-        "type": "Patient",
-        "age": 57,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "crutches",
-        "journey": "M"
-    },
-    {
-        "type": "Patient",
-        "age": 62,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "wheelchairs",
-        "journey": "L"
-    },
-    {
-        "type": "Patient",
-        "age": 76,
+        "age": 16,
         "personality": "open",
         "emotions": {
             "pleasure": 0.75,
@@ -535,72 +470,12 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "blind",
-        "journey": "L"
-    },
-    {
         "type": "Patient",
-        "age": 23,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
         "status": "sticks",
-        "journey": "M"
-    },
-    {
-        "type": "Patient",
-        "age": 73,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "crutches",
-        "journey": "G"
-    },
-    {
-        "type": "Patient",
-        "age": 44,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "blind",
-        "journey": "W"
-    },
-    {
-        "type": "Patient",
-        "age": 20,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "wheelchairs",
         "journey": "F"
     },
     {
-        "type": "Patient",
-        "age": 24,
+        "age": 28,
         "personality": "neurotic",
         "emotions": {
             "pleasure": 0.75,
@@ -610,11 +485,11 @@
             "hate": -0.4,
             "sad": -0.4
         },
+        "type": "Patient",
         "status": "crutches",
         "journey": "G"
     },
     {
-        "type": "Patient",
         "age": 84,
         "personality": "open",
         "emotions": {
@@ -625,12 +500,27 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "crutches",
-        "journey": "L"
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "W"
     },
     {
+        "age": 59,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
         "type": "Patient",
-        "age": 18,
+        "status": "wheelchairs",
+        "journey": "F"
+    },
+    {
+        "age": 7,
         "personality": "neurotic",
         "emotions": {
             "pleasure": 0.75,
@@ -640,88 +530,13 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "wheelchairs",
-        "journey": "N"
-    },
-    {
         "type": "Patient",
-        "age": 64,
-        "personality": "neurotic",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "wheelchairs",
-        "journey": "W"
-    },
-    {
-        "type": "Patient",
-        "age": 13,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "crutches",
-        "journey": "L"
-    },
-    {
-        "type": "Patient",
-        "age": 10,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "sticks",
-        "journey": "W"
-    },
-    {
-        "type": "Patient",
-        "age": 42,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
-        "status": "crutches",
-        "journey": "N"
-    },
-    {
-        "type": "Patient",
-        "age": 74,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
         "status": "sticks",
         "journey": "K"
     },
     {
-        "type": "Patient",
-        "age": 23,
-        "personality": "open",
+        "age": 10,
+        "personality": "neurotic",
         "emotions": {
             "pleasure": 0.75,
             "surprise": 0.5,
@@ -730,12 +545,12 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "crutches",
-        "journey": "W"
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "E"
     },
     {
-        "type": "Patient",
-        "age": 52,
+        "age": 36,
         "personality": "open",
         "emotions": {
             "pleasure": 0.75,
@@ -745,12 +560,42 @@
             "hate": -0.4,
             "sad": -0.4
         },
+        "type": "Patient",
         "status": "crutches",
+        "journey": "B"
+    },
+    {
+        "age": 94,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "crutches",
+        "journey": "G"
+    },
+    {
+        "age": 63,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "blind",
         "journey": "L"
     },
     {
-        "type": "Patient",
-        "age": 19,
+        "age": 83,
         "personality": "open",
         "emotions": {
             "pleasure": 0.75,
@@ -760,26 +605,101 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "sticks",
-        "journey": "F"
-    },
-    {
         "type": "Patient",
-        "age": 65,
-        "personality": "open",
-        "emotions": {
-            "pleasure": 0.75,
-            "surprise": 0.5,
-            "anger": -0.2,
-            "fear": -0.2,
-            "hate": -0.4,
-            "sad": -0.4
-        },
         "status": "wheelchairs",
         "journey": "N"
     },
     {
+        "age": 91,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
         "type": "Patient",
+        "status": "blind",
+        "journey": "L"
+    },
+    {
+        "age": 47,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "crutches",
+        "journey": "E"
+    },
+    {
+        "age": 77,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "F"
+    },
+    {
+        "age": 9,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "sticks",
+        "journey": "K"
+    },
+    {
+        "age": 94,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "W"
+    },
+    {
+        "age": 72,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "crutches",
+        "journey": "F"
+    },
+    {
         "age": 39,
         "personality": "open",
         "emotions": {
@@ -790,7 +710,83 @@
             "hate": -0.4,
             "sad": -0.4
         },
-        "status": "sticks",
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "N"
+    },
+    {
+        "age": 98,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "blind",
         "journey": "E"
+    },
+    {
+        "age": 52,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "E"
+    },
+    {
+        "age": 48,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "F"
+    },
+    {
+        "age": 19,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "sticks",
+        "journey": "K"
+    },
+    {
+        "age": 8,
+        "personality": "open",
+        "emotions": {
+            "pleasure": 0.75,
+            "surprise": 0.5,
+            "anger": -0.2,
+            "fear": -0.2,
+            "hate": -0.4,
+            "sad": -0.4
+        },
+        "type": "Patient",
+        "status": "wheelchairs",
+        "journey": "N"
     }
 ]
