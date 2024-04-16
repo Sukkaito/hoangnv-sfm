@@ -54,7 +54,7 @@ class Event:
         self.intensity = intensity
         self.time = time
 
-def generate_time(data) -> ([list, int]): #Return timeDistribution list and size of list
+def generate_time(data) -> list[list, int]: #Return timeDistribution list and size of list
     n = data["timeBetweenEventsDistribution"]["distribution"]["normal"]["samples"] #n = 43
     k = data["timeBetweenEventsDistribution"]["distribution"]["normal"]["numberOfValues"] #k = 200
     min_value = data["timeBetweenEventsDistribution"]["distribution"]["normal"]["minValue"] #min_value = 100
@@ -74,7 +74,7 @@ def generate_time(data) -> ([list, int]): #Return timeDistribution list and size
         else:
             return [sample.tolist(), n]
 
-def generate_events(data) -> ([list, int]): #Return eventList and size of list
+def generate_events(data) -> list[list, int]: #Return eventList and size of list
     n = data["eventDistribution"]["distribution"]["normal"]["samples"] #n = 43
     k = data["eventDistribution"]["distribution"]["normal"]["numberOfValues"] #k = 200
     min_value = data["eventDistribution"]["distribution"]["normal"]["minValue"] #min_value = -1
@@ -108,8 +108,8 @@ def generate_events(data) -> ([list, int]): #Return eventList and size of list
             events.append([abs(allEvents[j][i]) for j in range(0, emo_type_count)])
     return [events, n]
 
-def generate_ages(data) -> ([list, int]):
-    #n = data["ageDistribution"]["distribution"]["normal"]["samples"] # Using jsonref
+def generate_ages(data) -> list[list, int]: #Return ageList and size of list
+    # n = data["ageDistribution"]["distribution"]["normal"]["samples"] # Using jsonref
     n = data["numOfAgents"]["value"] #n = numOfAgents
     k = data["ageDistribution"]["distribution"]["normal"]["numberOfValues"]
     min_value = data["ageDistribution"]["distribution"]["normal"]["minValue"] # min_value = 5
@@ -128,10 +128,10 @@ def generate_ages(data) -> ([list, int]):
         if p_value < alpha:
             continue
         else:
-            f = lambda x: ((x >= 23) & (x <= 61))
+            f = lambda x: ((x >= 23) & (x <= 61)) #Personels' age range: 23 <= x <= 61
             cond = f(sample)
             sample = np.concatenate((np.extract(~cond, sample), np.extract(cond, sample)))
-            #Put special value of age first, prioritize Personels' age in this case
+            #Put special value of age LAST, prioritize Personels' age in this case
             return [sample.tolist(), n]
 
 def generate_pedestrians(data):
@@ -149,12 +149,6 @@ def generate_pedestrians(data):
         if key != "forPersonel" and journey_distribution[key]["start"] in journeys:
             journeys.remove(journey_distribution[key]["start"])
 
-    # num_patients = 0
-    # num_visitors = 0
-    # num_crutches = 0
-    # num_sticks = 0
-    # num_wheelchairs = 0
-    # num_blind = 0
     num_openness = 0
     num_neuroticism = 0
 
@@ -162,8 +156,9 @@ def generate_pedestrians(data):
     allTimeDistances, timeDistancesCount = generate_time(data)
     allAge, ageCount = generate_ages(data) # Prioritize Personel first
 
+    #Prioritize order: Personel > Visitor > Patient
     while len(pedestrians) < num_agents:
-        age = allAge.pop() # Prioritize Personel first
+        age = allAge.pop() # Prioritize Personel first by popping LAST value
 
         if (num_neuroticism >= 0.53 * num_agents) | (age < 11): #Age < 11 must be "open" personality
             personality = "open"
@@ -176,7 +171,6 @@ def generate_pedestrians(data):
             if (personality == "open"): num_openness += 1
             else: num_neuroticism += 1
 
-        #Prioritize order: Personel > Visitor > Patient
         if (num_personel > 0) & (age >= 23) & (age <= 61): #Age outside 23 - 61 can't be Personel
             # Personel
             walkability = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
@@ -205,31 +199,12 @@ def generate_pedestrians(data):
             weights = [weight / total_weight for weight in weights]
             walkability = random.choices(statuses, weights=weights)[0]
             pedestrian = Patient(age, personality, walkability, journey, [])
-            # num_patients += 1
-            # if status == "crutches":
-            #     num_crutches += 1
-            # elif status == "sticks":
-            #     num_sticks += 1
-            # elif status == "wheelchairs":
-            #     num_wheelchairs += 1
-            # elif status == "blind":
-            #     num_blind += 1
 
         for i in range(20):
             eventID = random.randint(0, eventCount - 1)
             timeDistancesID = random.randint(0, timeDistancesCount - 1)
             pedestrian.events.append(Event(allEvents[eventID], allTimeDistances[timeDistancesID]))
         pedestrians.append(pedestrian)
-
-    # print("Number of personel:", num_personel)
-    # print("Number of visitors:", num_visitors)
-    # print("Number of patients:", num_patients)
-    # print("Number of patients with crutches:", num_crutches)
-    # print("Number of patients with sticks:", num_sticks)
-    # print("Number of patients with wheelchairs:", num_wheelchairs)
-    # print("Number of blind patients:", num_blind)
-    # print("Number of people with openness:", num_openness)
-    # print("Number of people with neuroticism:", num_neuroticism)
 
     return pedestrians
 
