@@ -1,13 +1,28 @@
 import json
 import random
 import numpy as np
-
+import scipy.stats as stats
 
 class Pedestrian:
-    def __init__(self, age, personality):
-        self.age = age
+    pedestrianCount = 0
+
+    def __init__(self, age = 0, personality = [], journey = [], emotion = {}, start = 'A', end = 'A', velocity = 0, events = [],
+     walkingTime = 0, distance = 0, impactOfAGV = [], tempPoints = (0,0)):
+        self.ID = Pedestrian.pedestrianCount
+        Pedestrian.pedestrianCount += 1
+        self.start = start
+        self.end = end
+        self.journey = journey
+        self.velocity = velocity
         self.personality = personality
-        self.emotions = {
+        self.events = events
+        self.walkingTime = walkingTime
+        self.distance = distance
+        self.age = age
+        self.impactOfAGV = impactOfAGV
+        self.tempPoints = tempPoints
+
+        self.emotion = {
             "pleasure": 0.75,
             "surprise": 0.5,
             "anger": -0.2,
@@ -17,25 +32,81 @@ class Pedestrian:
         }
 
 class Patient(Pedestrian):
-    def __init__(self, age, personality, status, journey):
-        super().__init__(age, personality)
+    def __init__(self, age, personality, walkability, journey, events):
+        super().__init__(age=age, personality=personality, journey=journey, events=events)
         self.type = "Patient"
-        self.status = status
-        self.journey = journey
+        self.walkability = walkability
 
 class Visitor(Pedestrian):
-    def __init__(self, age, personality, status, journey):
-        super().__init__(age, personality)
+    def __init__(self, age, personality, walkability, journey, events):
+        super().__init__(age=age, personality=personality, journey=journey, events=events)
         self.type = "Visitor"
-        self.status = status
-        self.journey = journey
+        self.walkability = walkability
 
 class Personel(Pedestrian):
-    def __init__(self, age, personality, status, journey):
-        super().__init__(age, personality)
+    def __init__(self, age, personality, walkability, journey, events):
+        super().__init__(age=age, personality=personality, journey=journey, events=events)
         self.type = "Personel"
-        self.status = status
-        self.journey = journey
+        self.walkability = walkability
+
+class Event:
+    def __init__(self, intensity = [], time = 0):
+        self.intensity = intensity
+        self.time = time
+
+def generate_time(data) -> ([list, int]): #Return timeDistribution list and size of list
+    n = data["timeBetweenEventsDistribution"]["distribution"]["normal"]["samples"] #n = 43
+    k = data["timeBetweenEventsDistribution"]["distribution"]["normal"]["numberOfValues"] #k = 200
+    min_value = data["timeBetweenEventsDistribution"]["distribution"]["normal"]["minValue"] #min_value = 100
+    max_value = data["timeBetweenEventsDistribution"]["distribution"]["normal"]["maxValue"] #max_value = 3600
+
+    mean = (min_value + max_value) / 2 #Mean
+    std = (max_value - min_value) / 6 #Standard deviation, both can be modified
+    while (True):
+        sample = np.random.normal(mean, std, n) #Samples follow normal distribution
+        sample = np.round(sample, 0) #Round to nearest whole
+
+        stat, p_value = stats.shapiro(sample) # Calculate p_value
+
+        alpha = 0.05 # Level of significant
+        if p_value < alpha:
+            continue #Retry until normal distribution is achieved
+        else:
+            return [sample.tolist(), n]
+
+def generate_events(data) -> ([list, int]): #Return eventList and size of list
+    n = data["eventDistribution"]["distribution"]["normal"]["samples"] #n = 43
+    k = data["eventDistribution"]["distribution"]["normal"]["numberOfValues"] #k = 200
+    min_value = data["eventDistribution"]["distribution"]["normal"]["minValue"] #min_value = -1
+    max_value = data["eventDistribution"]["distribution"]["normal"]["maxValue"] #max_value = 1
+    emo_type_count = data["eventDistribution"]["distribution"]["normal"]["numberOfFields"] # emo_type_count = 6
+    
+    mean = (min_value + max_value) / 2 #Mean
+    std = (max_value - min_value) / 6 #Standard deviation, both can be modified
+
+    allEvents = []
+
+    i = 0
+    while (i < emo_type_count): #6 types of emotion
+        sample = np.random.normal(mean, std, n) #Samples follow normal distribution
+        sample = np.round(sample, 1) #1 significant floating point
+        
+        stat, p_value = stats.shapiro(sample)  #Calculate p_value
+        alpha = 0.05 #Level of significant
+        if p_value < alpha:
+            continue
+        allEvents.append(sample)
+        i += 1
+
+    events = []
+
+    #Standardize impact of events and convert 6xn -> nx6 array
+    for i in range(0, n):
+        if(allEvents[0][i] < 0):
+            events.append([(-1)*abs(allEvents[j][i]) for j in range(0, emo_type_count) ])
+        else:
+            events.append([abs(allEvents[j][i]) for j in range(0, emo_type_count)])
+    return [events, n]
 
 def generate_pedestrians(data):
     pedestrians = []
@@ -61,6 +132,9 @@ def generate_pedestrians(data):
     num_openness = 0
     num_neuroticism = 0
 
+    allEvents, eventCount = generate_events(data)
+    allTimeDistances, timeDistancesCount = generate_time(data)
+
     while len(pedestrians) < num_agents:
         age = random.randint(data["ageDistribution"]["distribution"]["normal"]["minValue"],
                              data["ageDistribution"]["distribution"]["normal"]["maxValue"])
@@ -78,30 +152,30 @@ def generate_pedestrians(data):
 
         if len(pedestrians) < num_personel:
             # Personel
-            status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
+            walkability = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
                                     weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"],
                                              data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
             journeyss = random.sample(journeys, 3)  # Chọn ngẫu nhiên 3 khoa viện
-            pedestrian = Personel(age, personality, status, journeyss)
+            pedestrian = Personel(age, personality, walkability, journeyss, [])
         elif len(pedestrians) < num_noDisability:
-            # Visitor
-            status = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
+            # Visitor, assuming Visitor must be NoDisability
+            walkability = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
                                     weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"],
                                              data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
             journey = random.choice(journeys)
-            pedestrian = Visitor(age, personality, status, journey)
+            pedestrian = Visitor(age, personality, walkability, journey, [])
             # num_visitors += 1
         else:
             # Patient
             journey = random.choice(journeys)
             # Lấy danh sách các loại bệnh và trọng số tương ứng
             statuses = ["crutches", "sticks", "wheelchairs", "blind"]
-            weights = [data["walkability"]["distribution"][status]["value"] for status in statuses]
+            weights = [data["walkability"]["distribution"][walkability]["value"] for walkability in statuses]
             # Chuẩn hóa trọng số để tổng bằng 1
             total_weight = sum(weights)
             weights = [weight / total_weight for weight in weights]
-            status = random.choices(statuses, weights=weights)[0]
-            pedestrian = Patient(age, personality, status, journey)
+            walkability = random.choices(statuses, weights=weights)[0]
+            pedestrian = Patient(age, personality, walkability, journey, [])
             # num_patients += 1
             # if status == "crutches":
             #     num_crutches += 1
@@ -112,14 +186,17 @@ def generate_pedestrians(data):
             # elif status == "blind":
             #     num_blind += 1
 
-        if pedestrian.age < 11 and pedestrian.status == "neurotic":
+        if pedestrian.age < 11 and pedestrian.walkability == "neurotic":
             continue
 
         if isinstance(pedestrian, Personel):
             if pedestrian.age < 23 or pedestrian.age > 61:
                 continue
 
-
+        for i in range(20):
+            eventID = random.randint(0, eventCount - 1)
+            timeDistancesID = random.randint(0, timeDistancesCount - 1)
+            pedestrian.events.append(Event(allEvents[eventID], allTimeDistances[timeDistancesID]))
         pedestrians.append(pedestrian)
 
     # print("Number of personel:", num_personel)
