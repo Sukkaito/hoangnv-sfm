@@ -108,6 +108,32 @@ def generate_events(data) -> ([list, int]): #Return eventList and size of list
             events.append([abs(allEvents[j][i]) for j in range(0, emo_type_count)])
     return [events, n]
 
+def generate_ages(data) -> ([list, int]):
+    #n = data["ageDistribution"]["distribution"]["normal"]["samples"] # Using jsonref
+    n = data["numOfAgents"]["value"] #n = numOfAgents
+    k = data["ageDistribution"]["distribution"]["normal"]["numberOfValues"]
+    min_value = data["ageDistribution"]["distribution"]["normal"]["minValue"] # min_value = 5
+    max_value = data["ageDistribution"]["distribution"]["normal"]["maxValue"] # max_value = 104
+
+    mean = (min_value + max_value) / 2 # Mean
+    std = (max_value - min_value) / 6 # Standard deviation
+    while (True):
+        sample = np.random.normal(mean, std, n) #Samples follow normal distribution
+        sample = np.clip(sample, min_value, max_value) # Value trimming
+        sample = np.round(sample, 1)
+
+        stat, p_value = stats.kstest(sample, 'norm', args=(mean, std)) # Calc p_value
+
+        alpha = 0.05 # Level of significant
+        if p_value < alpha:
+            continue
+        else:
+            f = lambda x: ((x >= 23) & (x <= 61))
+            cond = f(sample)
+            sample = np.concatenate((np.extract(~cond, sample), np.extract(cond, sample)))
+            #Put special value of age first, prioritize Personels' age in this case
+            return [sample.tolist(), n]
+
 def generate_pedestrians(data):
     pedestrians = []
 
@@ -134,12 +160,12 @@ def generate_pedestrians(data):
 
     allEvents, eventCount = generate_events(data)
     allTimeDistances, timeDistancesCount = generate_time(data)
+    allAge, ageCount = generate_ages(data) # Prioritize Personel first
 
     while len(pedestrians) < num_agents:
-        age = random.randint(data["ageDistribution"]["distribution"]["normal"]["minValue"],
-                             data["ageDistribution"]["distribution"]["normal"]["maxValue"])
+        age = allAge.pop() # Prioritize Personel first
 
-        if num_neuroticism >= 0.53 * num_agents:
+        if (num_neuroticism >= 0.53 * num_agents) | (age < 11): #Age < 11 must be "open" personality
             personality = "open"
             num_openness += 1
         elif num_openness >= 0.53 * num_agents:
@@ -148,23 +174,26 @@ def generate_pedestrians(data):
         else:
             personality = random.choice(["open", "neurotic"])
             if (personality == "open"): num_openness += 1
-            else: num_neuroticism += 1 
+            else: num_neuroticism += 1
 
-        if len(pedestrians) < num_personel:
+        #Prioritize order: Personel > Visitor > Patient
+        if (num_personel > 0) & (age >= 23) & (age <= 61): #Age outside 23 - 61 can't be Personel
             # Personel
             walkability = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
                                     weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"],
                                              data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
             journeyss = random.sample(journeys, 3)  # Chọn ngẫu nhiên 3 khoa viện
             pedestrian = Personel(age, personality, walkability, journeyss, [])
-        elif len(pedestrians) < num_noDisability:
+            num_personel -= 1
+            num_noDisability -= 1
+        elif (num_noDisability > 0):
             # Visitor, assuming Visitor must be NoDisability
             walkability = random.choices(["noDisabilityNoOvertaking", "noDisabilityOvertaking"],
                                     weights=[data["walkability"]["distribution"]["noDisabilityNoOvertaking"]["value"],
                                              data["walkability"]["distribution"]["noDisabilityOvertaking"]["value"]])[0]
             journey = random.choice(journeys)
             pedestrian = Visitor(age, personality, walkability, journey, [])
-            # num_visitors += 1
+            num_noDisability -= 1
         else:
             # Patient
             journey = random.choice(journeys)
@@ -185,13 +214,6 @@ def generate_pedestrians(data):
             #     num_wheelchairs += 1
             # elif status == "blind":
             #     num_blind += 1
-
-        if pedestrian.age < 11 and pedestrian.walkability == "neurotic":
-            continue
-
-        if isinstance(pedestrian, Personel):
-            if pedestrian.age < 23 or pedestrian.age > 61:
-                continue
 
         for i in range(20):
             eventID = random.randint(0, eventCount - 1)
