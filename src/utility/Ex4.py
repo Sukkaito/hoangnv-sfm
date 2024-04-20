@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.stats as stats
+import random
 import json
 jsonfile=open('data\input.json','r')
 readfile=jsonfile.read()
@@ -21,9 +22,9 @@ for each in data2:
 single=n-triple
 print(triple)
 #sinh du lieu
-max_value=n-len(ward)*3
+max_value=int(n*0.3) #len(ward)=10
 min_value=1
-mean=(max_value+min_value)/2
+mean=(triple*3+single)/len(ward)
 std_dev=(max_value-min_value)/6
 alpha=0.05
 while True:
@@ -31,9 +32,8 @@ while True:
     sample=np.round(sample,0)
     stat,p_value=stats.shapiro(sample)
     if p_value>=alpha:
-        if sum(sample)==triple*3+single and all(i>0 for i in sample):
+        if sum(sample)==triple*3+single: 
             break
-print(sample)
 #ghi ra json
 pair=dict(zip(ward,sample))
 with open ('data\Ward.json','w') as outjson:
