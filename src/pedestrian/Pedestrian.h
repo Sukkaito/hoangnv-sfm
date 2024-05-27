@@ -35,6 +35,14 @@ private:
     double age;
     vector<Event> events;
     AgvEvent impactOfAGV;
+    double lambda;
+    std::vector<double> timeDistances;
+    double pleasure=0.75;
+    double surprise=0.5;
+    double anger=-0.2;
+    double fear=-0.2;
+    double hate=-0.4;
+    double sad=-0.4;
 public:
     void setAcceleration(float acceleration);
     double getAcceleration() const { return acceleration; }
@@ -53,5 +61,29 @@ public:
     void setAge(double age);
     void setEvents(vector<Event> events);
     void setImpactOfAGV(AgvEvent impactOfAGV);
-    
+    int getLambda();
+    void setLambda();
+
+    vector<Event> getEvents();
+
+    vector<double> getTimeDistances();
+    void setTimeDistances(vector<double> timeDistances);
+    double getPleasure(){
+        return pleasure;
+    }
+    double getSurprise(){
+        return surprise;
+    }
+    double getAnger(){
+        return anger;
+    }
+    double getFear(){
+        return fear;
+    }
+    double getHate(){
+        return hate;
+    }
+    double getSad(){
+        return sad;
+    }
 };

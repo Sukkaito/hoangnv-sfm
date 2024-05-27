@@ -26,6 +26,7 @@ void Pedestrian::setAgeDistribution(string description, string distribution_desc
     this->ageDistribution.distribution.normalDistribution.maxValue = maxValue;
 }
 
+
 void Pedestrian::setId(int id)
 {
     this->id=id;
@@ -84,4 +85,12 @@ void Pedestrian::setEvents(vector<Event> events)
 void Pedestrian::setImpactOfAGV(AgvEvent impactOfAGV)
 {
     this->impactOfAGV=impactOfAGV;
+}
+
+vector<Event> Pedestrian::getEvents(){
+    return events;
+}
+
+void Pedestrian::setTimeDistances(vector<double> timeDistances){
+    this->timeDistances=timeDistances;
 }
