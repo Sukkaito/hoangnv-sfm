@@ -134,6 +134,54 @@ def generate_ages(data) -> list[list, int]: #Return ageList and size of list
             #Put special value of age LAST, prioritize Personels' age in this case
             return [sample.tolist(), n]
 
+s = {
+    "type": {
+        "patientCount": 0,
+        "visitorCount": 0,
+        "personelCount": 0
+    },
+    "walkability": {
+        "noDisabilityNoOvertakingCount": 0,
+        "noDisabilityOvertakingCount": 0,
+        "crutchesCount": 0,
+        "sticksCount": 0,
+        "wheelchairsCount": 0,
+        "blindCount": 0
+    },
+    "personality": {
+        "openCount": 0,
+        "neuroticCount": 0
+    }
+}
+def updateStats(p: Pedestrian):
+    match (p.type):
+        case "Patient":
+            s["type"]["patientCount"] += 1
+        case "Visitor":
+            s["type"]["visitorCount"] += 1
+        case "Personel":
+            s["type"]["personelCount"] += 1
+    
+    match p.walkability:
+        case "noDisabilityNoOvertaking":
+            s["walkability"]["noDisabilityNoOvertakingCount"] += 1
+        case "noDisabilityOvertaking":
+            s["walkability"]["noDisabilityOvertakingCount"] += 1
+        case "crutches":
+            s["walkability"]["crutchesCount"] += 1
+        case "sticks":
+            s["walkability"]["sticksCount"] += 1
+        case "wheelchairs":
+            s["walkability"]["wheelchairsCount"] += 1
+        case "blind":
+            s["walkability"]["blindCount"] += 1
+    
+    match p.personality:
+        case "open":
+            s["personality"]["openCount"] += 1
+        case "neurotic":
+            s["personality"]["neuroticCount"] += 1
+
 def generate_pedestrians(data):
     pedestrians = []
 
@@ -204,7 +252,9 @@ def generate_pedestrians(data):
             eventID = random.randint(0, eventCount - 1)
             timeDistancesID = random.randint(0, timeDistancesCount - 1)
             pedestrian.events.append(Event(allEvents[eventID], allTimeDistances[timeDistancesID]))
+        
         pedestrians.append(pedestrian)
+        updateStats(pedestrian)
 
     return pedestrians
 
@@ -224,6 +274,7 @@ def main():
     pedestrians = generate_pedestrians(data)
 
     write_json_file("../../data/Pedestrian.json", pedestrians)
+    write_json_file("../../data/statistic.json", s)
 
 
 if __name__ == "__main__":

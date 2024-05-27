@@ -1,0 +1,19 @@
+{
+    "type": {
+        "patientCount": 37,
+        "visitorCount": 2,
+        "personelCount": 11
+    },
+    "walkability": {
+        "noDisabilityNoOvertakingCount": 9,
+        "noDisabilityOvertakingCount": 4,
+        "crutchesCount": 8,
+        "sticksCount": 7,
+        "wheelchairsCount": 7,
+        "blindCount": 15
+    },
+    "personality": {
+        "openCount": 23,
+        "neuroticCount": 27
+    }
+}
