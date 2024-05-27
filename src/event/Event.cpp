@@ -31,3 +31,11 @@ void Event::setNumberOfFields(int numberOfFields)
 {
     this->numberOfFields=numberOfFields;
 }
+
+void Event::setIntensity(vector<double> intensity){
+    this->intensity=intensity;
+}
+
+vector<double> Event::getIntensity(){
+    return intensity;
+}

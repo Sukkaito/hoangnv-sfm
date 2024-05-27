@@ -11,6 +11,7 @@ class Event
         int maxValue;
         int numberOfValues;
         int numberOfFields;
+        vector<double> intensity;
     public:
         void setDescription(string description);
         void setSample(int sample);
@@ -18,6 +19,9 @@ class Event
         void setMaxValue(int maxValue);
         void setNumberOfValues(int numberOfValues);
         void setNumberOfFields(int numberOfFields);
+
+        void setIntensity(vector<double> intensity);
+        vector<double> getIntensity();
 };
 #endif // EVENT_H
 
