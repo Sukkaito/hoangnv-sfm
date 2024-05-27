@@ -20,3 +20,10 @@ void Personality::setPercentage(int percentage)
 {
     this->percentage=percentage;
 }
+
+void Personality::setName(string name){
+    this->name=name;
+}
+string Personality::getName(){
+    return name;
+}

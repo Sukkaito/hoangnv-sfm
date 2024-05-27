@@ -6,6 +6,7 @@ using namespace std;
 class Personality
 {
 private:
+    string name;
     string positiveEmotionThreshold;
     string negativeEmotionThreshold;
     int lambda;
@@ -16,5 +17,12 @@ public:
     void setNegativeEmotionThreshold(string negativeEmotionThreshold);
     void setLambda(int lambda);
     void setPercentage(int percentage);
+    
+    void setName(string name){
+        this->name=name;
+    }
+    string getName(){
+        return name;
+    }
 };
 #endif // PERSONALITY_H
