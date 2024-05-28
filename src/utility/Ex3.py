@@ -182,7 +182,7 @@ def updateStats(p: Pedestrian):
         case "neurotic":
             s["personality"]["neuroticCount"] += 1
 
-def generate_pedestrians(data):
+def generate_pedestrians(data) -> list[Pedestrian]:
     pedestrians = []
 
     num_agents = data["numOfAgents"]["value"]
@@ -259,6 +259,40 @@ def generate_pedestrians(data):
     return pedestrians
 
 
+def assign_personelWard(data, pList: list[Pedestrian]) -> list[Pedestrian]:
+    ward=list(data["wardDistribution"]["distribution"].keys())[:-1]
+    n=s["type"]["personelCount"]
+    print(n)
+    max_value=int(n*0.3) #len(ward)=10
+    min_value=0
+    mean=n/len(ward)
+    std_dev=(max_value-min_value)/6
+    alpha=0.05
+    while True:
+        sample=np.random.normal(mean,std_dev,len(ward))
+        sample=np.round(sample,0)
+        stat,p_value=stats.shapiro(sample)
+        if p_value>=alpha:
+            break
+
+    pair=dict(zip(ward,sample))
+    print(pair)
+    for ward in pair:
+        if pair[ward] > 0: break
+
+    for p in pList:
+        if (isinstance(p, Personel)):
+            if pair[ward] > 0:
+                p.start = ward
+                p.end = ward
+                pair[ward] -= 1
+            else:
+                for ward in pair:
+                    if pair[ward] > 0: break
+
+    return pList
+
+
 def write_json_file(filename, data: list):
     with open(filename, "w") as json_file:
         json.dump(
@@ -272,6 +306,7 @@ def main():
         data = json.load(file)
 
     pedestrians = generate_pedestrians(data)
+    pedestrians = assign_personelWard(data, pedestrians)
 
     write_json_file("../../data/Pedestrian.json", pedestrians)
     write_json_file("../../data/statistic.json", s)
