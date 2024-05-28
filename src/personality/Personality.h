@@ -10,19 +10,15 @@ private:
     string positiveEmotionThreshold;
     string negativeEmotionThreshold;
     int lambda;
-    int percentage;
 
 public:
     void setPositiveEmotionThreshold(string positiveEmotionThreshold);
     void setNegativeEmotionThreshold(string negativeEmotionThreshold);
-    void setLambda(int lambda);
-    void setPercentage(int percentage);
     
-    void setName(string name){
-        this->name=name;
-    }
-    string getName(){
-        return name;
-    }
+    void setName(string name);
+    string getName() const;
+
+    void setLambda(int lambda);
+    int getLambda() const;
 };
 #endif // PERSONALITY_H

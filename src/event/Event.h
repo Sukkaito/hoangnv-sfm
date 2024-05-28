@@ -4,24 +4,18 @@
 using namespace std;
 class Event
 {
-    private:
-        string description;
-        int sample;
-        int minValue;
-        int maxValue;
-        int numberOfValues;
-        int numberOfFields;
-        vector<double> intensity;
-    public:
-        void setDescription(string description);
-        void setSample(int sample);
-        void setMinValue(int minValue);
-        void setMaxValue(int maxValue);
-        void setNumberOfValues(int numberOfValues);
-        void setNumberOfFields(int numberOfFields);
+private:
+    std::vector<double> intensity {0,0,0,0,0,0};
+    int time;
 
-        void setIntensity(vector<double> intensity);
-        vector<double> getIntensity();
+public:
+    // Getters
+    std::vector<double> getIntensity() const;
+    int getTime() const;
+
+    // Setters
+    void setIntensity(std::vector<double>& intensity);
+    void setTime(int time);
 };
 #endif // EVENT_H
 

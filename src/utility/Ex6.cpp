@@ -1,11 +1,11 @@
-#include "src/pedestrian/pedestrian.h"
-#include "src/pedestrian/pedestrian.cpp"
+#include "src/pedestrian/Pedestrian.h"
+#include "src/pedestrian/Pedestrian.cpp"
 #include "src/event/Event.h"
 #include <vector>
 using namespace std;
 std:: vector<vector<double>> Ex6(Pedestrian p,int timeHorizon){
     std::vector<Event> events =p.getEvents();
-    double lambda=p.getLambda();
+    int lambda=p.getLambda();
     std::vector<double> times=p.getTimeDistances();
     std::vector<std::vector<double>> allEmotions={
         {p.getPleasure()},
