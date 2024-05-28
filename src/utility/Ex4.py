@@ -17,10 +17,10 @@ jsonfile2=open('data\Pedestrian.json','r')
 readfile2=jsonfile2.read()
 data2=json.loads(readfile2)
 for each in data2:
-    if each["type"]=="Personel":
+    if each["type"]=="Personel" or each["type"]=="Patient":
         triple+=1
 single=n-triple
-print(triple)
+#print(triple)
 #sinh du lieu
 max_value=int(n*0.3) #len(ward)=10
 min_value=1
