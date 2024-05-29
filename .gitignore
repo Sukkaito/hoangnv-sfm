@@ -13,3 +13,4 @@ test/example.cpp
 a.out
 end.txt
 map2.txt
+data/**
