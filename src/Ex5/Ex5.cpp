@@ -60,7 +60,7 @@ vector<char> Chon_3_Ward(vector<WardData> &ward_values, int n, string start, str
 }
 
 void Ex5(){
-    ifstream jsonFile1("Statistic.json");
+    ifstream jsonFile1("../../data/Statistic.json");
 
     // Check if the file was successfully opened
     if (!jsonFile1.is_open()) {
@@ -75,7 +75,7 @@ void Ex5(){
     // Close the file
     jsonFile1.close();
 
-    ifstream jsonFile2("Ward.json");
+    ifstream jsonFile2("../../data/Ward.json");
 
     // Check if the file was successfully opened
     if (!jsonFile2.is_open()) {
@@ -103,7 +103,7 @@ void Ex5(){
         ward_values.push_back(ward_data);
     }
 
-    ifstream jsonFile3("Pedestrian.json");
+    ifstream jsonFile3("../../data/Pedestrian.json");
 
     // Check if the file was successfully opened
     if (!jsonFile3.is_open()) {
@@ -153,7 +153,7 @@ void Ex5(){
         }
     }
 
-    ofstream outFile("Pedestrian.json");
+    ofstream outFile("../../data/Pedestrian.json");
     if (!outFile.is_open()) {
         cerr << "Không thể mở tệp để ghi!" << endl;
         return;
