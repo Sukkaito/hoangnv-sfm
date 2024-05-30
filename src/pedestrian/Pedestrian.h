@@ -35,6 +35,7 @@ private:
     double age;
     vector<Event> events;
     AgvEvent impactOfAGV;
+    
 public:
     void setAcceleration(float acceleration);
     double getAcceleration() const { return acceleration; }
@@ -53,5 +54,11 @@ public:
     void setAge(double age);
     void setEvents(vector<Event> events);
     void setImpactOfAGV(AgvEvent impactOfAGV);
+    AgvEvent getImpactOfAGV() const {return impactOfAGV}
+    Ward getStart() const {return start;}
+    Ward getEnd() const {return end;}
+    double getAge() const {return age;}
+    Personality getPersonality () {return personality;}
+    
     
 };

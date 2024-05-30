@@ -8,6 +8,7 @@
 #include "src/ward/Ward.h"        // Include the header where Ward is declared
 #include "src/event/Event.h"
 #include "src/agvEvent/AgvEvent.h"
+#include "src/ward/Ward.cpp"
 using namespace std;
 void Pedestrian::setAcceleration(float acceleration)
 {

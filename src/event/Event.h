@@ -18,6 +18,8 @@ class Event
         void setMaxValue(int maxValue);
         void setNumberOfValues(int numberOfValues);
         void setNumberOfFields(int numberOfFields);
+        int getNumberOfValues() const {return numberOfValues;}
+        
 };
 #endif // EVENT_H
 
