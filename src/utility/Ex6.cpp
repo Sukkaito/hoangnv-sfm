@@ -6,7 +6,7 @@ using namespace std;
 std:: vector<vector<double>> Ex6(Pedestrian p,int timeHorizon){
     std::vector<Event> events =p.getEvents();
     int lambda=p.getLambda();
-    std::vector<double> times=p.getTimeDistances();
+    std::vector<int> times=p.getTimeDistances();
     std::vector<std::vector<double>> allEmotions={
         {p.getPleasure()},
         {p.getSurprise()},
@@ -30,7 +30,7 @@ std:: vector<vector<double>> Ex6(Pedestrian p,int timeHorizon){
     allEmotions[3].push_back(f);
     allEmotions[4].push_back(h);
     allEmotions[5].push_back(sa);
-    for (int i = 2; i < timeHorizon; ++i) {
+    for (int i = 1; i < timeHorizon; ++i) {
         pl = allEmotions[0][i];
         su = allEmotions[1][i];
         a = allEmotions[2][i];

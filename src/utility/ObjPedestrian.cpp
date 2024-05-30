@@ -8,15 +8,15 @@
 
 using json=nlohmann::json;
 
-void instantiatePedestrians(){
+std::vector<Pedestrian> instantiatePedestrians(){
     json dt=Utility::readInputData("data/input.json");
     int numOfAgents=dt["numOfAgents"]["value"];
     json data=Utility::readInputData("data/Pedestrian.json");
-    std::vector<Pedestrian> objPedestrians;
+    std::vector<Pedestrian> Pedestrians;
     for(int i=0;i<numOfAgents;i++){
         //ID
         Pedestrian tmp;
-        tmp.setId(data[i]["ID"]);
+        tmp.setID(data[i]["ID"]);
 
         //start,end Ward
         Ward st;
@@ -27,7 +27,7 @@ void instantiatePedestrians(){
         tmp.setEnd(ed);
 
         //journey
-        vector<Ward> journey;
+        std::vector<Ward> journey;
         for(int j=0;j<data[i]["journey"].size();j++){
             Ward w;
             w.setName(data[i]["journey"][j]);
@@ -43,8 +43,8 @@ void instantiatePedestrians(){
         per.setName(data[i]["personality"]);
         tmp.setPersonality(per);
         
-        //event
-        vector<Event> events;
+        //event: intensity and time
+        std::vector<Event> events;
         for(int j=0;j<data[i]["events"].size();j++){
             Event event;
             vector<double> intensity;
@@ -52,17 +52,11 @@ void instantiatePedestrians(){
                 intensity.push_back(data[i]["events"]["intensity"][k]);
             }
             event.setIntensity(intensity);
+            event.setTime(data[i]["event"]["time"]);
             events.push_back(event);
         }
         tmp.setEvents(events);
-        //timeDistances
-        vector<double> timeDistances;
-        for(int j=0;j<data[i]["events"].size();j++){
-            double time=data[i]["events"][j]["time"];
-            timeDistances.push_back(time);
-        }
-        tmp.setTimeDistances(timeDistances);
-        objPedestrians.push_back(tmp);
     }
+    return Pedestrians;
 }
 
