@@ -1,32 +1,44 @@
-#include "Ward.h"
-using namespace std;
-void Ward::setPA(Point2d pA)
-{
-    this->pA=pA;
-}
+#include "src/point/Point.cpp"
 
-void Ward::setPB(Point2d pB)
-{
-    this->pB=pB;
-}
+class Ward{
+private: 
+string name;   
+Point entrant;
+Point exit;
+vector<Point> walls;
 
-void Ward::setPC(Point2d pC)
-{
-    this->pC=pC;
-}
+public:
+    Ward(){};
+    // Setters with input validation (optional, adjust validation as needed)
+    void setName(string s){
+        name = s;
+    }
 
+    void setEntrant(const Point& newEntrant) {
+        entrant = newEntrant;
+    }
 
-void Ward::setPD(Point2d pD)
-{
-    this->pD=pD;
-}
+    void setExit(const Point& newExit) {
+        exit = newExit;
+    }
 
-void Ward::setEntry(Point2d entry){
-    this->entry = entry;
+    void addWall(const Point& newWall) {
+        walls.push_back(newWall);
+    }
 
-}
+    // Getters
+    const Point& getEntrant() const {
+        return entrant;
+    }
 
-void Ward::setExit(Point2d exit)
-{
-    this->exit=exit;
-}
+    const Point& getExit() const {
+        return exit;
+    }
+
+    const vector<Point>& getWalls() const {
+        return walls;
+    }
+    string getName(){
+        return name;
+    }
+};

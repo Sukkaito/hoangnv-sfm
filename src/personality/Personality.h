@@ -10,6 +10,7 @@ private:
     string negativeEmotionThreshold;
     int lambda;
     int percentage;
+    
 
 public:
     void setPositiveEmotionThreshold(string positiveEmotionThreshold);
