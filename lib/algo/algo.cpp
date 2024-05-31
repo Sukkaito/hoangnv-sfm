@@ -221,7 +221,7 @@ int calculateNumberOfCrossings(vector < vector < int > > &crossesNumber,vector<v
 void prepareAlgorithm(vector<point> &diem, vector< vector < lineSegment> > &dagiac)
 {
     ifstream file;
-    string filename = "test.txt";
+    string filename = "data/maphospital.txt";
     file.open(filename);
     if (!file) {
         cout << "can not open!" << endl;
