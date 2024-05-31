@@ -54,4 +54,8 @@ public:
     void setEvents(vector<Event> events);
     void setImpactOfAGV(AgvEvent impactOfAGV);
     
+    //Phương thức lấy tọa độ các điểm trung gian
+    //Nhận điểm đầu,điểm đích, các điểm trung gian.
+    //Trả 1 mảng các điểm theo thứ tự từ đích -> đầu
+    vector<Point2d> getWayPoint(Point2d s, Point2d d,vector<Point2d> mid);
 };
