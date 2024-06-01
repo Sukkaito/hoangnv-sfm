@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#include <lib/nlohmann/json.hpp>
+
 using namespace std;
 double max_y,max_x,min_y,min_x;
 
@@ -46,7 +48,13 @@ struct lineSegment {
                (this->p==other.q && this->q==other.p);
     }
 };
-
+string xyz(string a)
+{
+    string str = "";
+    for (char c: a)
+        if(isalpha(c) != 0) str += c;
+    return str;    
+}
 typedef std::pair<double,std::pair<int,int> > pq_pair;
 
 double dist(point p, point q){
@@ -294,4 +302,72 @@ vector<point> findPath(point S, point D)
     return result;
 }
 
+// Trả về 1 vector là tập hợp các điểm từ s -> d
+// vector<point> mid: lần lượt là điểm đi vào , điểm đi ra của các điểm trung gian
+// Vdu: đi vào khoa B thì điểm đi vào khoa B và điểm đi ra khoa B ( 2 tọa độ là khác nhau)
+vector<point> getWayPoint(point src, point des, vector<point> mid) {
+    vector<point> waypoints;    
+    int m = mid.size();
+    // Lọc các vector để đưa ra kết quả theo thứ tự từ s -> d
+    for(point p: findPath(src,mid[0])) waypoints.push_back(p);
 
+    for(int i=1; i<m-2 ; i+=2)
+    {
+        for(point p: findPath(mid[i],mid[i+1]))
+            waypoints.push_back(p);
+    }
+    for(point p: findPath(mid[m-1],des)) waypoints.push_back(p);
+    return waypoints;
+}
+
+
+// đưa dữ liệu từ điểm A thành point, xét cả tọa độ đi vào hay đi ra
+point settPoint(string mode, char c)
+{
+    if (mode =="in")
+    {
+
+    }
+    else if (mode == "out")
+    {
+
+    }
+}
+//này trả về các vector điểm là tập hợp hành trình của 1 ID
+vector<point> exportWaypoint()
+{
+    ifstream jsonFile("data/Pedestrian.json");
+    if (!jsonFile.is_open()) {
+        cerr << "ERROR!" <<endl;
+        return;
+    }
+    nlohmann::json data;
+    jsonFile >> data;
+    jsonFile.close();
+
+    // ofstream outputFile("data/ex9.txt");
+
+    for (const auto& pedestrian : data) {
+        vector<point> waypoint;
+        string start = xyz(pedestrian["start"]);
+        string end = xyz(pedestrian["end"]);
+        string journey =xyz(pedestrian["journey"].dump());
+        
+        point src = settPoint("out",start[0]);
+        point des = settPoint("in",journey[0]);
+        
+        for(point p: findPath(src,des)) waypoint.push_back(p);
+        
+        for(int i=0; i < journey.size()-1 ; i++) 
+        {
+            point src = settPoint("out",journey[i]);
+            point des = settPoint("in",journey[i+1]);
+            for(point p: findPath(src,des)) waypoint.push_back(p);
+        }
+
+        point src = settPoint("out",journey[journey.size()-1]);
+        point des = settPoint("in",end[0]);
+        for(point p: findPath(src,des)) waypoint.push_back(p);
+    }
+    return ;
+}

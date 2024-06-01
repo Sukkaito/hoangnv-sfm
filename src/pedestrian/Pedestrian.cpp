@@ -86,15 +86,3 @@ void Pedestrian::setImpactOfAGV(AgvEvent impactOfAGV)
 {
     this->impactOfAGV=impactOfAGV;
 }
-
-vector<Point2d> Pedestrian::getWayPoint(Point2d s, Point2d d, vector<Point2d> mid) {
-    vector<Point2d> waypoints;
-    /*
-    1. Chuyển kiểu Point2d -> point
-    2. Đưa các điểm trung gian thành tọa độ (điểm vào và ra khác nhau)
-    3. Gọi hàm find path với mỗi cặp điểm
-    4. Lọc các vector để đưa ra kết quả theo thứ tự từ s -> d
-    5. ...
-    */
-    return waypoints;
-}
