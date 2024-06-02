@@ -53,5 +53,5 @@ public:
     void setAge(double age);
     void setEvents(vector<Event> events);
     void setImpactOfAGV(AgvEvent impactOfAGV);
-    
+
 };
