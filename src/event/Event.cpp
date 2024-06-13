@@ -2,32 +2,20 @@
 #include "Event.h"
 using namespace std;
 
-void Event::setDescription(string description)
-{
-    this->description=description;
+void Event::setIntensity(vector<double>& intensity) {
+    this->intensity=intensity;
 }
 
-void Event::setSample(int sample)
+void Event::setTime(int time)
 {
-    this->sample=sample;
+    this-> time = time;
 }
 
-void Event::setMinValue(int minValue)
-{
-    this->minValue=minValue;
+vector<double> Event::getIntensity() const{
+    return intensity;
 }
 
-void Event::setMaxValue(int maxValue)
+int Event::getTime() const
 {
-    this->maxValue=maxValue;
-}
-
-void Event::setNumberOfValues(int numberOfValues)
-{
-    this->numberOfValues=numberOfValues;
-}
-
-void Event::setNumberOfFields(int numberOfFields)
-{
-    this->numberOfFields=numberOfFields;
+    return time;
 }

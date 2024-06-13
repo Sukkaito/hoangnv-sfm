@@ -30,3 +30,10 @@ void Ward::setExit(Point2d exit)
 {
     this->exit=exit;
 }
+
+void Ward::setName(string name){
+    this->name=name;
+}
+string Ward::getName(){
+    return name;
+}

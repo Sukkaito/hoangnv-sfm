@@ -6,6 +6,7 @@ using namespace std;
 class Ward
 {
 private:
+    string name;
     Point2d pA,pB,pC,pD;
     Point2d entry,exit;
 
@@ -17,5 +18,8 @@ public:
 
     void setEntry(Point2d entry);
     void setExit(Point2d exit);
+
+    void setName(string name);
+    string getName();
 };
 #endif // WARD_H

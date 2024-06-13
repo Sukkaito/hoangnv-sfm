@@ -5,7 +5,7 @@
 #include "src/event/Event.h"
 using namespace std;
 
-class AgvEvent : public Event
+class AGVEvent : public Event
 {
     
 };
