@@ -7,7 +7,7 @@ class Pedestrian:
     pedestrianCount = 0
 
     def __init__(self, age = 0, personality = [], journey = [], emotion = {}, start = 'A', end = 'A', velocity = 0, events = [],
-     walkingTime = 0, distance = 0, impactOfAGV = [], tempPoints = (0,0)):
+     walkingTime = 0, distance = 0, impactOfAGV = {}, tempPoints = (0,0)):
         self.ID = Pedestrian.pedestrianCount
         Pedestrian.pedestrianCount += 1
         self.start = start

@@ -1,16 +1,16 @@
 {
     "type": {
         "patientCount": 37,
-        "visitorCount": 2,
-        "personelCount": 11
+        "visitorCount": 3,
+        "personelCount": 10
     },
     "walkability": {
-        "noDisabilityNoOvertakingCount": 9,
-        "noDisabilityOvertakingCount": 4,
-        "crutchesCount": 8,
-        "sticksCount": 7,
+        "noDisabilityNoOvertakingCount": 10,
+        "noDisabilityOvertakingCount": 3,
+        "crutchesCount": 9,
+        "sticksCount": 13,
         "wheelchairsCount": 7,
-        "blindCount": 15
+        "blindCount": 8
     },
     "personality": {
         "openCount": 23,
