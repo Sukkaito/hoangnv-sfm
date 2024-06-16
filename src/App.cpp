@@ -1,12 +1,13 @@
 #if defined(__linux__)
 #include <GL/glut.h>
 #else
-#include <GLUT/glut.h>
+#include <GL/glut.h>
 #endif
 
 #include <random>
 #include <lib/nlohmann/json.hpp>
 
+#include <runMode3.cpp> //Copy runMode3.cpp content and paste here (literally)
 #include "model/SocialForce.h"
 #include "constant/Constant.h"
 #include "renderer/Renderer.h"
@@ -101,7 +102,7 @@ int main(int argc, char **argv)
             }
         } while (input1 != "1" && input1 != "2");
     }
-    else
+    else if ((int)inputData["runMode"]["value"] == 1)
     {
         juncDataList = Utility::convertMapData(mapData);
         float hallwayLength = juncDataList[juncIndex].items().begin().value();
@@ -110,7 +111,9 @@ int main(int argc, char **argv)
         float length1Side = (hallwayLength) / 2;
         juncData = {length1Side, length1Side};
     }
-
+    else if ((int)inputData["runMode"]["value"] == 3) {
+        return runMode3();
+    }
     float deviationParam = randomFloat(1 - (float)inputData["experimentalDeviation"]["value"] / 100, 1 + (float)inputData["experimentalDeviation"]["value"] / 100);
     // Threshold people stopping at the corridor
     threshold = int(inputData["numOfAgents"]["value"]) * deviationParam * (float)(inputData["stopAtHallway"]["value"]) / 100;

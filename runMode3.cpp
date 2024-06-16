@@ -11,7 +11,8 @@
 
 
 using json=nlohmann::json;
-int main() {
+//int main {
+int runMode3() {
     const json input = Utility::readInputData("data/input.json");
     const json personalityDist = input["personalityDistribution"]["distribution"];
     Personality::personalityMap = {
