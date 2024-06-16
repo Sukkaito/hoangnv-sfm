@@ -9,6 +9,10 @@ class Visitor : public Pedestrian{
         Walkability walkability;
     public:
         void setWalkability(Walkability walkability);
+        Visitor();
+        Visitor(Pedestrian& p, Walkability w);
+        friend void to_json(nlohmann::json& json, const Visitor& p);
+
 };
 
 #endif

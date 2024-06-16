@@ -1,5 +1,9 @@
 #include "Ward.h"
 using namespace std;
+
+Ward::Ward(string n): name(move(n)) {}
+Ward::Ward() {};
+
 void Ward::setPA(Point2d pA)
 {
     this->pA=pA;
@@ -34,6 +38,11 @@ void Ward::setExit(Point2d exit)
 void Ward::setName(string name){
     this->name=name;
 }
-string Ward::getName(){
+string Ward::getName() const{
     return name;
 }
+
+void Ward::operator=(Ward const &w)
+{
+    this->name = w.getName();
+};

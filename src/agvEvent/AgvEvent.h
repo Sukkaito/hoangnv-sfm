@@ -7,6 +7,6 @@ using namespace std;
 
 class AGVEvent : public Event
 {
-    
+    using Event::Event;
 };
 #endif //AGVEVENT_H

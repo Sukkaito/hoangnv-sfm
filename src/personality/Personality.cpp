@@ -1,12 +1,21 @@
 
 #include "Personality.h"
+#include "src/utility/Utility.h"
+using namespace Utility;
 
-void Personality::setPositiveEmotionThreshold(string positiveEmotionThreshold)
+Personality::Personality() {};
+Personality::Personality(string _name): name(move(_name)) {};
+
+Personality::Personality(string _name, double _positiveEmotionThreshold, double _negativeEmotionThreshold, int _lambda):
+    name(move(_name)), positiveEmotionThreshold(_positiveEmotionThreshold),
+    negativeEmotionThreshold(_negativeEmotionThreshold), lambda(_lambda) {};
+
+void Personality::setPositiveEmotionThreshold(double positiveEmotionThreshold)
 {
     this->positiveEmotionThreshold=positiveEmotionThreshold;
 }
 
-void Personality::setNegativeEmotionThreshold(string negativeEmotionThreshold)
+void Personality::setNegativeEmotionThreshold(double negativeEmotionThreshold)
 {
     this->negativeEmotionThreshold=negativeEmotionThreshold;
 }

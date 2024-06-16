@@ -5,11 +5,88 @@
 // walkability
 #include "Pedestrian.h"
 #include "src/personality/Personality.h"  // Include the header where Personality is declared
+#include <src/patient/Patient.h>
+#include <src/personel/Personel.h>
+#include <src/visitor/Visitor.h>
 #include "src/ward/Ward.h"        // Include the header where Ward is declared
 #include "src/event/Event.h"
 #include "src/agvEvent/AgvEvent.h"
+#include "src/utility/Utility.h"
 using namespace std;
+using namespace Utility;
 
+void to_json(nlohmann::json& json, const Pedestrian& p) {
+        json["ID"] = p.ID; 
+        json["start"] = p.start.getName();
+        json["end"] = p.end.getName();
+        std::vector<string> journey;
+        for (auto& j : p.journey) journey.push_back(j.getName());
+        json["journey"] = journey;
+        json["velocity"] = p.velocity; 
+        json["personality"] = p.personality; 
+        json["emotion"] = p.emotion; 
+        json["events"] = p.events; 
+        json["walkingTime"] = p.walkingTime; 
+        json["distance"] = p.distance; 
+        json["age"] = p.age; 
+        json["impactOfAGV"] = p.impactOfAGV;
+        double point[2];
+        p.tempPoints.get(point);
+        json["tempPoints"] = point;
+    }
+
+void from_json(const nlohmann::json& json, Pedestrian& p) {
+        // cout << json << endl;
+        json.at("ID").get_to(p.ID);
+        // cout << "ID: " << p.ID << endl;
+        //cout << "json[\"start\"]: " << (string) json["start"] << endl;
+        p.start = Ward(json["start"]);
+        // cout << "p.start = " << p.start.getName() << endl;
+        p.end = Ward(json["end"]);
+        // cout << "p.end = " << p.end.getName() << endl;
+        try {
+            auto jour = json["journey"];
+            std::vector<Ward> journey;
+            for (auto& j : jour) journey.push_back(Ward(j));
+            p.journey = journey;
+        }
+        catch (...) {
+            p.journey = std::vector<Ward> {Ward(json["journey"])};
+        }
+        
+        // cout << "p.journey = ";
+        // for (auto j : p.journey) cout << j.getName() << " ";
+        // cout << endl;
+
+        //json.at("velocity").get_to(p.velocity);
+        p.velocity = Pedestrian::velocityMap[json["walkability"]]; //Map velocity according to input.json
+        // cout << "p.velocity = " << p.velocity << endl;
+
+        // cout << json["personality"] << endl;
+        p.personality = Personality::personalityMap[json["personality"]];
+        // cout << "p.personality = " << p.personality.getName() << endl;
+        
+        json.at("emotion").get_to(p.emotion);
+        // cout << p.emotion.getAnger() << endl;
+
+        json.at("events").get_to(p.events);
+        // for (auto t: p.getTimeDistances()) cout << t << " ";
+        // cout << endl;
+
+        json.at("walkingTime").get_to(p.walkingTime); 
+        json.at("distance").get_to(p.distance); 
+        json.at("age").get_to(p.age);
+        // cout << "Age: " << p.age << endl;
+
+        json.at("impactOfAGV").get_to(p.impactOfAGV);
+        // cout << "impactOfAGV_time: " << p.impactOfAGV.getTime() << endl;
+
+        std::vector<double> point = json.at("tempPoints").get<std::vector<double>>();
+        p.tempPoints = Point2d(point[0], point[1]);
+    }
+
+
+Pedestrian::Pedestrian() {}
 // Getters
 int Pedestrian::getID() const {
     return ID;
@@ -150,4 +227,12 @@ std::vector<int> Pedestrian::getTimeDistances() const {
         timeDists.push_back(event.getTime());
     }
     return timeDists;
+}
+
+ostream& operator<<(ostream &os, const Pedestrian& p)
+{
+    nlohmann::json j;
+    to_json(j, p);
+    os << j;
+    return os;
 }

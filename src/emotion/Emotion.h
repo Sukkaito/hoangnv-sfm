@@ -1,6 +1,7 @@
 #ifndef EMOTION_H
 #define EMOTION_H
 #include <bits/stdc++.h>
+#include <lib/nlohmann/json.hpp>
 using namespace std;
 class Emotion 
 {
@@ -24,6 +25,8 @@ public:
     double getFear() const;
     double getHate() const;
     double getSad() const;
+    
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Emotion, pleasure, surprise, anger, fear, hate, sad)
 };
 
 #endif

@@ -4,7 +4,7 @@
 #if defined(__linux__)
 #include <GL/glut.h>
 #else
-#include <GLUT/glut.h>
+#include <GL/glut.h>
 #endif
 
 #include <vector>
