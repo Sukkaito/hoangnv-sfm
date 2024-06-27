@@ -1,1 +1,0 @@
-50-200 file json nếu không hiểu ( không nhớ) xem bài 2
